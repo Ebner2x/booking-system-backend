@@ -23,7 +23,9 @@ app.use(cors({
 // Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/booking-system', {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    connectTimeoutMS: 10000, // Increase connection timeout
+    socketTimeoutMS: 45000 // Increase socket timeout
 })
 .then(() => {
     console.log('Connected to MongoDB');
