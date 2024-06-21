@@ -8,9 +8,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Update the allowed origins here
-const allowedOrigins = ['https://cutting-room-website.vercel.app/#booking'];
-
+const allowedOrigins = ['https://cutting-room-website.vercel.app'];
 app.use(cors({
     origin: function (origin, callback) {
         if (!origin) return callback(null, true);
@@ -60,7 +58,6 @@ app.post('/book', async (req, res) => {
     const { name, email, barber, date, time } = req.body;
     const booking = new Booking({ name, email, barber, date, time, status: 'pending' });
 
-    // Define the barber email based on the selected barber
     const barberEmail = {
         'Barber Robert': 'ebnerqh07@gmail.com',
         'Barber Reco': 'reco@example.com',
@@ -72,7 +69,6 @@ app.post('/book', async (req, res) => {
         await booking.save();
         console.log('Booking saved:', booking);
 
-        // Send email to barber
         const mailOptions = {
             from: 'ebner2x@gmail.com',
             to: barberEmail,
@@ -107,7 +103,6 @@ app.get('/confirm/:id', async (req, res) => {
         booking.status = 'confirmed';
         await booking.save();
 
-        // Send confirmation email to the customer
         const mailOptions = {
             from: 'ebner2x@gmail.com',
             to: booking.email,
@@ -137,7 +132,6 @@ app.get('/decline/:id', async (req, res) => {
         booking.status = 'declined';
         await booking.save();
 
-        // Send decline email to the customer
         const mailOptions = {
             from: 'ebner2x@gmail.com',
             to: booking.email,
