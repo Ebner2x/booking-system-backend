@@ -10,8 +10,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors()); // Enable CORS 
 
 // Connect to MongoDB
-const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/booking-system';
-mongoose.connect(mongoURI, {
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/booking-system', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
@@ -72,13 +71,12 @@ app.post('/book', async (req, res) => {
 
         transporter.sendMail(mailOptions, (error, info) => {
             if (error) {
-                console.log('Error sending email:', error);
-                return res.status(500).send('Error sending email');
+                return console.log('Error sending email:', error);
             }
             console.log('Email sent:', info.response);
-            res.send('Booking request sent!');
         });
 
+        res.send('Booking request sent!');
     } catch (error) {
         console.error('Error saving booking:', error);
         res.status(500).send('Error saving booking');
