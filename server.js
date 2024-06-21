@@ -7,10 +7,14 @@ const cors = require('cors');
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors()); // Enable CORS 
+
+// CORS configuration
+app.use(cors({
+    origin: 'https://your-frontend-domain.vercel.app' // Replace with your actual frontend URL
+}));
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/booking-system', {
+mongoose.connect(process.env.MONGODB_URI || 'your_mongodb_connection_string', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
