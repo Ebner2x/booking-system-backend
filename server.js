@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors()); // Enable CORS 
 
 // Connect to MongoDB
-mongoose.connect('mongodb://localhost:27017/booking-system', {
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/booking-system', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
@@ -65,8 +65,8 @@ app.post('/book', async (req, res) => {
             to: barberEmail,
             subject: 'New Booking Request',
             text: `You have a new booking request from ${name} on ${date} at ${time}. Please confirm or decline.\n\n
-                   Confirm: http://localhost:3000/confirm/${booking._id}\n
-                   Decline: http://localhost:3000/decline/${booking._id}`
+                   Confirm: https://booking-system-backend-huj6.onrender.com/confirm/${booking._id}\n
+                   Decline: https://booking-system-backend-huj6.onrender.com/decline/${booking._id}`
         };
 
         transporter.sendMail(mailOptions, (error, info) => {
@@ -143,6 +143,12 @@ app.get('/decline/:id', async (req, res) => {
     }
 });
 
-app.listen(3000, () => {
-    console.log('Server is running on port 3000');
+// Root route
+app.get('/', (req, res) => {
+    res.send('Welcome to the Booking System Backend');
+});
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });
