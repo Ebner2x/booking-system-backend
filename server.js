@@ -8,7 +8,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-const allowedOrigins = ['https://cutting-room-website-ioglvbwm4-ebner2xs-projects-2e2965e5.vercel.app/#booking']; // Update this line
+const allowedOrigins = ['https://cutting-room-website-ioglvbwm4-ebner2xs-projects-2e2965e5.vercel.app'];
 app.use(cors({
     origin: function (origin, callback) {
         if (!origin) return callback(null, true);
@@ -17,7 +17,8 @@ app.use(cors({
             return callback(new Error(msg), false);
         }
         return callback(null, true);
-    }
+    },
+    optionsSuccessStatus: 200
 }));
 
 // Connect to MongoDB
