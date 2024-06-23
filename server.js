@@ -8,9 +8,12 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-const allowedOrigins = [' https://vercel.com/ebner2xs-projects-2e2965e5/cutting-room-website/E65pynAKhHwi8D5ZLA3WuXJE6Pyi'];
+// Replace with your frontend URL
+const allowedOrigins = ['https://cutting-room-website-e74orjjnx-ebner2xs-projects-2e2965e5.vercel.app'];
+
 app.use(cors({
     origin: function (origin, callback) {
+        // Allow requests with no origin (like mobile apps or curl requests)
         if (!origin) return callback(null, true);
         if (allowedOrigins.indexOf(origin) === -1) {
             const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
