@@ -8,7 +8,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-const allowedOrigins = ['https://cutting-room-website-ioglvbwm4-ebner2xs-projects-2e2965e5.vercel.app'];
+const allowedOrigins = [' https://vercel.com/ebner2xs-projects-2e2965e5/cutting-room-website/E65pynAKhHwi8D5ZLA3WuXJE6Pyi'];
 app.use(cors({
     origin: function (origin, callback) {
         if (!origin) return callback(null, true);
