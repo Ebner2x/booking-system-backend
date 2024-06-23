@@ -9,7 +9,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Replace with your frontend URL
-const allowedOrigins = ['https://cutting-room-website-e74orjjnx-ebner2xs-projects-2e2965e5.vercel.app'];
+const allowedOrigins = ['https://cutting-room-website.vercel.app', 'https://cutting-room-website-e74orjjnx-ebner2xs-projects-2e2965e5.vercel.app', 'http://localhost:3000'];
 
 app.use(cors({
     origin: function (origin, callback) {
